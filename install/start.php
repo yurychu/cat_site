@@ -31,11 +31,14 @@
         if ($connection->connect_error){
             die("Не удалось соединиться с БД -- " . $connection->connect_error);
         } else {
-            echo "Соединение установлено <br>";
+            echo "Соединение установлено" . "<br>";
         }
 
-        // создаем базу данных
-        $sql = "CREATE DATABASE catalog_site;";
+        // создаем базу данных и таблицы (выполнение sql скрипта)
+        
+        $sql = file_get_contents("create_db.sql");
+        echo "выполняется скрипт: " . $sql . "<br>";
+        
         if ($connection->query($sql) === TRUE){
             echo "База данных успешно создана";
         } else {
@@ -44,5 +47,8 @@
 
         $connection->close();
 
+    } else {
+        echo "Для установки нужно заполнить поля";
     }
 ?>
+
