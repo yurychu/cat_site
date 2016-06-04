@@ -1,6 +1,6 @@
-CREATE DATABASE catalog_site4;
+CREATE DATABASE catalog_site;
 
-USE catalog_site4;
+USE catalog_site;
 
 CREATE TABLE category (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

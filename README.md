@@ -1,5 +1,7 @@
 # cat_site
 
+sudo tasksel install lamp-server
+
 
 /etc/hosts
 <...>
@@ -8,6 +10,10 @@
 
 
 Конфиги апача:
+/etc/apache2/conf-available/charset.conf
+раскомментить AddDefaultCharset UTF-8
+
+
 /etc/apache2/apache2.conf
 <...>
 <Directory /home/USERNAME-PC>
