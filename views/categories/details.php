@@ -14,7 +14,5 @@
 </p>
 <p>
     Активность: <br>
-    <?php echo $category->action;?>
+    <?php echo $category->active;?>
 </p>
-
-<a href="?controller=categories&action=edit&id=<?= $category->id ?>">Редактировать</a>

@@ -5,7 +5,7 @@
         $controller = $_GET['controller'];
         $action = $_GET['action'];
     } else {
-        $controller = 'admins';
+        $controller = 'pages';
         $action = 'home';
     }
 

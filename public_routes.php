@@ -1,14 +1,14 @@
 <?php
 function call($controller, $action){
-    require_once('controllers/'. $controller . '_controller.php');
+    require_once('controllers/public_'. $controller . '_controller.php');
 
     switch ($controller){
         case 'pages':
-            $controller = new PagesController();
+            $controller = new PublicPagesController();
             break;
         case 'categories':
             require_once('models/category.php');
-            $controller = new CategoriesController();
+            $controller = new PublicCategoriesController();
             break;
     }
 
@@ -17,7 +17,7 @@ function call($controller, $action){
 
 $controllers = array(
     'pages' => ['home', 'error'],
-    'categories' => ['index', 'show', 'create', 'add', 'edit', 'edited']
+    'categories' => ['list_', 'details']
 );
 
 if (array_key_exists($controller, $controllers)){

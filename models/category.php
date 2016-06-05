@@ -60,4 +60,23 @@ class Category {
         
         return $stm;
     }
+
+    public static function edit($id, $name, $short_description, $full_description, $active){
+        $db = Database::get_instance();
+        $req = $db->prepare(
+            'UPDATE category ' .
+            'SET name=:name, short_description=:short_description, ' .
+            'full_description=:full_description, active=:active ' .
+            'WHERE id=:id');
+
+        $stm = $req->execute(array(
+            'id' => $id,
+            'name' => $name,
+            'short_description' => $short_description,
+            'full_description' => $full_description,
+            'active' => $active
+        ));
+
+        return $stm;
+    }
 }
