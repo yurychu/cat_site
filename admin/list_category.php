@@ -1,8 +1,9 @@
 <h1>Список категорий</h1>
 <?php
-require_once '../classes/Database.php';
-$database = new Database();
-$result = $database->show_categories();
+require_once 'controller/controller.php';
+echo 'hi';
+$result = get_all_categories();
+
 if ($result->num_rows > 0){
     while ($row = $result->fetch_assoc()){
         echo "<h2>".$row['name']."</h2>".
@@ -14,3 +15,4 @@ if ($result->num_rows > 0){
     echo "Результаты не найдены";
 }
 include '../includes/footer_admin.php';
+?>
