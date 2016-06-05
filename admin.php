@@ -1,13 +1,12 @@
 <?php
-include 'includes/main_menu_admin.php';
+    require_once('connection.php');
 
-require_once 'classes/Database.php';
-
-$database = new Database();
-
-if(isset($_GET['show'])){
-    if ($_GET['show'] = "category"){
-        $result = $database->select();
-        echo $result;
+    if (isset($_GET['controller']) && isset($_GET['action'])){
+        $controller = $_GET['controller'];
+        $action = $_GET['action'];
+    } else {
+        $controller = 'admins';
+        $action = 'home';
     }
-}
+
+    require_once('views/layout_admin.php');

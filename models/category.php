@@ -45,4 +45,19 @@ class Category {
             $category['full_description'],
             $category['active']);
     }
+
+    public static function add($name, $short_description, $full_description, $active){
+        $db = Database::get_instance();
+        $req = $db->prepare(
+            'INSERT INTO category (name, short_description, full_description, active)'.
+            'VALUES (:name, :short_description, :full_description, :active)');
+        $stm = $req->execute(array(
+            'name' => $name,
+            'short_description' => $short_description,
+            'full_description' => $full_description,
+            'active' => $active
+            ));
+        
+        return $stm;
+    }
 }

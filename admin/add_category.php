@@ -1,6 +1,6 @@
 <h1>Добавление новой категории</h1>
 
-<?php if ($_SERVER['REQUEST_METHOD'] == "GET"):?>
+
     <form action="" method="POST">
         <p>
             <label for="name">Название категории</label>
@@ -20,12 +20,4 @@
         </p>
         <input type="submit">
     </form>
-<?php else:
-    require_once '../classes/Database.php';
-    $database = new Database();
-    $database->add_category($_POST);
-    
-endif;
 
-include '../includes/footer_admin.php';
-?>
