@@ -17,7 +17,7 @@ function call($controller, $action){
 
 $controllers = array(
     'pages' => ['home', 'error'],
-    'categories' => ['index', 'show', 'create', 'add']
+    'categories' => ['index', 'show', 'create', 'add', 'edit', 'edited']
 );
 
 if (array_key_exists($controller, $controllers)){

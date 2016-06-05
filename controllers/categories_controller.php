@@ -28,4 +28,16 @@ class CategoriesController{
             $_POST['active']);
         require_once('views/categories/added.php');
     }
+
+    public function edit(){
+        if(!isset($_GET['id']))
+            return call('pages', 'error');
+
+        $category = Category::find($_GET['id']);
+        require_once('views/categories/edit.php');
+    }
+
+    public function edited(){
+
+    }
 }

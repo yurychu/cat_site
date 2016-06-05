@@ -9,7 +9,7 @@
     <a href="?controller=categories&action=index">Cписок категорий товаров</a>
     <a href="?controller=categories&action=create">Создать новую категорию</a>
 </div>
-<?php require_once('routes.php'); ?>
+<?php require_once('admin_routes.php'); ?>
 <div>
     <hr>
 </div>
