@@ -11,6 +11,7 @@ function call($controller, $action){
             $controller = new AdminCategoriesController();
             break;
         case 'goodses':
+            require_once('models/category.php');
             require_once('models/goods.php');
             $controller = new AdminGoodsesController();
             break;
@@ -22,7 +23,7 @@ function call($controller, $action){
 $controllers = array(
     'pages' => ['home', 'error'],
     'categories' => ['list_', 'details', 'create', 'add', 'edit', 'edited'],
-    'goodses' => ['list_']
+    'goodses' => ['list_', 'create', 'add']
 );
 
 if (array_key_exists($controller, $controllers)){

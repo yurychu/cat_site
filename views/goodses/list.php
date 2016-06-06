@@ -4,6 +4,6 @@
             echo $goods->name; 
             echo $goods->category;
         ?>
-        <a href="?controller=categories&action=details&id=<?php echo $category->id;?>">Подробнее</a>
+        <a href="?controller=goodses&action=details&id=<?php echo $goods->id;?>">Подробнее</a>
     </p>
 <?php } ?>

@@ -63,20 +63,39 @@ class Goods {
             $category['full_description'],
             $category['active']);
     }
-
-    public static function add($name, $short_description, $full_description, $active){
+*/
+    public static function add($name, $short_description, $full_description, 
+                               $active, $in_stock, $can_be_ordered, $category_id){
         $db = Database::get_instance();
         $req = $db->prepare(
-            'INSERT INTO category (name, short_description, full_description, active)'.
-            'VALUES (:name, :short_description, :full_description, :active)');
+            'INSERT INTO goods (name, short_description, full_description, active, in_stock, can_be_ordered)'.
+            'VALUES (:name, :short_description, :full_description, :active, :in_stock, :can_be_ordered)');
         $stm = $req->execute(array(
             'name' => $name,
             'short_description' => $short_description,
             'full_description' => $full_description,
-            'active' => $active
+            'active' => $active,
+            'in_stock' => $in_stock,
+            'can_be_ordered' => $can_be_ordered
+        ));
+        $goods_id = $db->lastInsertId();
+        
+        $req = $db->prepare(
+            'INSERT INTO category_goods (category_id, goods_id) '.
+            'VALUES (:category_id, :goods_id)');
+        $stm = $req->execute(array(
+            'category_id' => $category_id,
+            'goods_id' => $goods_id
         ));
 
         return $stm;
+    }
+    /*
+    public static function pre_add(){
+        $db = Database::get_instance();
+        $req = $db->prepare(
+            'SELECT '
+        )
     }
 
     public static function edit($id, $name, $short_description, $full_description, $active){
