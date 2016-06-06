@@ -75,7 +75,7 @@ class Goods {
     }
 
     public static function add($name, $short_description, $full_description, 
-                               $active, $in_stock, $can_be_ordered, $category_id){
+                               $active, $in_stock, $can_be_ordered, $categories_id){
         $db = Database::get_instance();
         $req = $db->prepare(
             'INSERT INTO goods (name, short_description, full_description, active, in_stock, can_be_ordered)'.
@@ -89,15 +89,16 @@ class Goods {
             'can_be_ordered' => $can_be_ordered
         ));
         $goods_id = $db->lastInsertId();
-        
-        $req = $db->prepare(
-            'INSERT INTO category_goods (category_id, goods_id) '.
-            'VALUES (:category_id, :goods_id)');
-        $stm = $req->execute(array(
-            'category_id' => $category_id,
-            'goods_id' => $goods_id
-        ));
 
+        foreach ($categories_id as $category_id){
+            $req = $db->prepare(
+                'INSERT INTO category_goods (category_id, goods_id) '.
+                'VALUES (:category_id, :goods_id)');
+            $stm = $req->execute(array(
+                'category_id' => $category_id,
+                'goods_id' => $goods_id
+            ));
+        }
         return $stm;
     }
 
@@ -142,7 +143,7 @@ class Goods {
         }
         return $list;
     }
-/*
+
     public static function edit($id, $name, $short_description, $full_description, $active){
         $db = Database::get_instance();
         $req = $db->prepare(
@@ -160,5 +161,5 @@ class Goods {
         ));
 
         return $stm;
-    }*/
+    }
 }

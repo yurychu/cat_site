@@ -12,7 +12,7 @@ class AdminGoodsesController {
     public function add(){
         $result = Goods::add(
             $_POST['name'],
-            $_POST['short_desription'],
+            $_POST['short_description'],
             $_POST['full_description'],
             $_POST['active'],
             $_POST['in_stock'],
@@ -50,5 +50,13 @@ class AdminGoodsesController {
             return call('pages', 'error');
         $goodses = Goods::other_goods($_GET['category_id']);
         require_once('views/goodses/admin/admin_list.php');
+    }
+    
+    public function edit(){
+        if(!isset($_GET['id']))
+            return call('pages', 'error');
+
+        $goods = Goods::find($_GET['id']);
+        require_once('views/goodses/admin/edit.php');
     }
 }
