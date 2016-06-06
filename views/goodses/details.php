@@ -26,5 +26,12 @@
 </p>
 <p>
     Категории: <br>
-    <?php echo $goods->category;?>
+    <?php
+        foreach ($goods->category as $category){
+            echo $category['name'];
+            ?>
+                <a href="?controller=goodses&action=other_goods&category_id=<?= $category['id'] ?>">Посмотреть другие товары в этой категории</a><br>
+            <?php
+        }
+    ;?>
 </p>

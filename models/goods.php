@@ -27,10 +27,10 @@ class Goods {
         $list = [];
         $db = Database::get_instance();
         $req = $db->query(
-            'select goods.id, goods.name, goods.short_description,
+            'SELECT goods.id, goods.name, goods.short_description,
              goods.full_description, goods.active, goods.in_stock,
              goods.can_be_ordered, GROUP_CONCAT(category.name) '.
-            'From goods '.
+            'FROM goods '.
             'INNER JOIN category_goods ON goods.id = category_goods.goods_id '.
             'LEFT JOIN category ON category_goods.category_id = category.id '.
             'GROUP BY goods.name');
@@ -61,7 +61,7 @@ class Goods {
             'WHERE id IN (SELECT category_id FROM category_goods WHERE goods_id = :id)'
         );
         $req->execute(array('id' => $id));
-        $category = $req->fetch();
+        $category = $req->fetchAll();
 
         return new Goods(
             $goods['id'],
@@ -71,7 +71,7 @@ class Goods {
             $goods['active'],
             $goods['in_stock'],
             $goods['can_be_ordered'],
-            $category['name']);
+            $category);
     }
 
     public static function add($name, $short_description, $full_description, 
@@ -100,14 +100,49 @@ class Goods {
 
         return $stm;
     }
-    /*
-    public static function pre_add(){
+
+    public static function add_category($goods_id, $category_id){
         $db = Database::get_instance();
         $req = $db->prepare(
-            'SELECT '
-        )
+            'INSERT INTO category_goods (category_id, goods_id) '.
+            'VALUES (:category_id, :goods_id)'
+        );
+        $stm = $req->execute(array(
+            'category_id' => $category_id,
+            'goods_id' => $goods_id
+        ));
+        return $stm;
     }
+    
+    public static function other_goods($id){
+        $list = [];
+        $db = Database::get_instance();
+        $req = $db->prepare(
+            'SELECT goods.id, goods.name, goods.short_description,
+             goods.full_description, goods.active, goods.in_stock,
+             goods.can_be_ordered, GROUP_CONCAT(category.name) '.
+            'FROM goods '.
+            'INNER JOIN category_goods ON goods.id = category_goods.goods_id '.
+            'LEFT JOIN category ON category_goods.category_id = category.id '.
+            'WHERE goods.id IN (SELECT goods_id FROM category_goods WHERE category_id = :id) '.
+            'GROUP BY goods.name ');
 
+        $req->execute(array('id' => $id));
+
+        foreach ($req->fetchAll() as $goods){
+            $list[] = new Goods(
+                $goods['id'],
+                $goods['name'],
+                $goods['short_description'],
+                $goods['full_description'],
+                $goods['active'],
+                $goods['in_stock'],
+                $goods['can_be_ordered'],
+                $goods['GROUP_CONCAT(category.name)']);
+        }
+        return $list;
+    }
+/*
     public static function edit($id, $name, $short_description, $full_description, $active){
         $db = Database::get_instance();
         $req = $db->prepare(
