@@ -20,4 +20,12 @@ class AdminGoodsesController {
             $_POST['category']);
         require_once('views/goodses/admin/added.php');
     }
+
+    public function details(){
+        if(!isset($_GET['id']))
+            return call('pages', 'error');
+
+        $goods = Goods::find($_GET['id']);
+        require_once('views/goodses/admin/admin_details.php');
+    }
 }

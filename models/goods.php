@@ -48,22 +48,32 @@ class Goods {
         }
         return $list;
     }
-/*
+
     public static function find($id){
         $db = Database::get_instance();
         $id = intval($id);
-        $req = $db->prepare('SELECT * FROM category WHERE id = :id');
+        $req = $db->prepare('SELECT * FROM goods WHERE id = :id');
+        $req->execute(array('id' => $id));
+        $goods = $req->fetch();
+
+        $req = $db->prepare(
+            'SELECT * FROM category '.
+            'WHERE id IN (SELECT category_id FROM category_goods WHERE goods_id = :id)'
+        );
         $req->execute(array('id' => $id));
         $category = $req->fetch();
 
-        return new Category(
-            $category['id'],
-            $category['name'],
-            $category['short_description'],
-            $category['full_description'],
-            $category['active']);
+        return new Goods(
+            $goods['id'],
+            $goods['name'],
+            $goods['short_description'],
+            $goods['full_description'],
+            $goods['active'],
+            $goods['in_stock'],
+            $goods['can_be_ordered'],
+            $category['name']);
     }
-*/
+
     public static function add($name, $short_description, $full_description, 
                                $active, $in_stock, $can_be_ordered, $category_id){
         $db = Database::get_instance();
