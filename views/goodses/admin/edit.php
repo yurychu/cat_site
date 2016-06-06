@@ -25,10 +25,17 @@
     </p>
     <p>
         <label for="category">Категория</label>
-        <select id="category" name="category" multiple>
-            <option disabled selected>Выберите категорию</option>
+        <select id="category" name="category[]" multiple>
             <?php foreach ($categories as $category){?>
-                <option value="<?=$category->id?>">
+                <option value="<?=$category->id?>"
+                    <?php
+                    foreach ($goods->category as $id){
+                        if($category->id == $id['id']){
+                            echo 'selected';
+                        }
+                    }
+                    ?>
+                >
                     <?= $category->name; ?>
                 </option>
             <?php } ?>

@@ -1,4 +1,5 @@
 <?php
+// Соединенияемся здесь с базой данных - одиночка
 class Database {
     private static $instance = NULL;
 

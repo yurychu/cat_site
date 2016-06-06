@@ -1,4 +1,5 @@
 # cat_site
+Использовал подход MVC.
 
 sudo tasksel install lamp-server
 
@@ -36,4 +37,3 @@ sudo tasksel install lamp-server
 
 
 mysql -u USERNAME -p < PATH_TO_DIRECTORY/cat_site/install/create_db.sql
-

@@ -9,7 +9,7 @@
     <a href="?controller=categories&action=list_">Cписок категорий товаров</a>
     <a href="?controller=goodses&action=list_">Товары</a>
 </div>
-<?php require_once('admin_routes.php'); ?>
+<?php require_once('admin_routes.php'); // связываемся с контроллерами?>
 <div>
     <hr>
 </div>

@@ -57,6 +57,7 @@ class AdminGoodsesController {
             return call('pages', 'error');
 
         $goods = Goods::find($_GET['id']);
+        $categories = Category::all();
         require_once('views/goodses/admin/edit.php');
     }
 }

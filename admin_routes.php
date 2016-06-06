@@ -1,5 +1,6 @@
 <?php
 function call($controller, $action){
+    // подключим нужный контроллер
     require_once('controllers/admin_'. $controller . '_controller.php');
 
     switch ($controller){
@@ -26,6 +27,7 @@ $controllers = array(
     'goodses' => ['list_', 'create', 'add', 'details', 'create_category', 'add_category', 'other_goods', 'edit']
 );
 
+// обработка допустимости запроса
 if (array_key_exists($controller, $controllers)){
     if (in_array($action, $controllers[$controller])){
         call($controller, $action);
